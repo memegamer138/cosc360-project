@@ -59,6 +59,6 @@ Wireframes and Mockups
 -	Clicking on a product leads to its detailed page
 -	Logged-in users can access additional features like wishlists and purchase history
 -	Admins can access the dashboard via a separate admin panel
--	
+
 This proposal outlines the core functionalities and design structure of the web application. Further refinements will be made based on feedback and development progress.
 
