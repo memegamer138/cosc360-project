@@ -1,8 +1,8 @@
 # Project Proposal: Gaming Accessories and Video Games Web Application
 ## Team Members and Roles
 1.	Shakthi Vel - Backend Developer
--	Oversees project scope and deadlines
 -	Implements database and server-side logic
+-	Integrates PHO code with frontend
 2.	Saketh Anand- Frontend Developer
 -	Develops user interface and designs responsive web pages
 -	Integrates UI components with backend services
