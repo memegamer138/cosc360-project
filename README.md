@@ -2,7 +2,7 @@
 ## Team Members and Roles
 1.	Shakthi Vel - Backend Developer
 -	Implements database and server-side logic
--	Integrates PHO code with frontend
+-	Integrates API code with frontend
 2.	Saketh Anand- Frontend Developer
 -	Develops user interface and designs responsive web pages
 -	Integrates UI components with backend services
