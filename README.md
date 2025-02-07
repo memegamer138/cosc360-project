@@ -39,21 +39,34 @@ The web application will follow a structured, user-friendly design with the foll
 -	Featured products
 -	Categories navigation
 -	Search bar
+
+![Home Page](figma-pages/home-page.png)
+
 2.	Product Listings Page:
 -	List of products with filtering and sorting options
 -	Pagination support
+
+![Product Listings Page](figma-pages/productListing-page.png)
+
 3.	Product Details Page:
 -	Detailed product descriptions
 -	User reviews and ratings
 -	Add to wishlist or cart options
+
+![Product Page](figma-pages/product-page.png)
+
 4.	User Account Page:
 -	Profile management
 -	Wishlist and order history
+
+![User Account Page](figma-pages/user-account.png)
+
 5.	Admin Dashboard:
 -	Manage users, products, and reviews
 -	View reports and analytics
-Wireframes and Mockups
-(Attach wireframes/mockups created in Figma, Adobe XD, or other tools.)
+
+![User Account Page](figma-pages/admin-page.png)
+
 # Navigation Structure
 -	Users navigate using the main menu (Home, Products, Categories, Account, Admin)
 -	Clicking on a product leads to its detailed page
