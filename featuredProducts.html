@@ -10,20 +10,68 @@
     <header>
         <h1>Featured Products</h1>
         <input type="text" id="search" placeholder="Search products...">
-        </header>
-        <main id="product-list"></main>
-       
-        <div class="pagination">
-            <button onclick="showPage(1)">1</button>
-            <button onclick="showPage(2)">2</button>
-            <button onclick="showPage(3)">3</button>
-        </div>
+        <select id="product-dropdown" onchange="navigateToProduct(this.value)">
+            <option value="">Select a product...</option>
+            <option value="The Last Of Us">The Last Of Us</option>
+            <option value="Uncharted Bundle">Uncharted Bundle</option>
+            <option value="GTA 6">GTA 6</option>
+            <option value="Spider-Man Miles Morales">Spider-Man Miles Morales</option>
+            <option value="Mario Bros Kart">Mario Bros Kart</option>
+            <option value="PS5 Controller">PS5 Controller</option>
+            <option value="Five Nights at Freddys">Five Nights at Freddys</option>
+            <option value="Freddy Plushie">Freddy Plushie</option>
+            <option value="Valorant">Valorant</option>
+            <option value="Ghost of Tsushima">Ghost of Tsushima</option>
+            <option value="Dead by Daylight">Dead by Daylight</option>
+            <option value="Forza Horizon 4">Forza Horizon 4</option>
+            <option value="Midtown Madness">Midtown Madness</option>
+            <option value="Shadow of the Colossus">Shadow of the Colossus</option>
+            <option value="Mario Smash Bros">Mario Smash Bros</option>
+            <option value="Subnautica">Subnautica</option>
+            <option value="Halo">Halo</option>
+            <option value="Need For Speed Poster">Need For Speed Poster</option>
+            <option value="Captain Claw">Captain Claw</option>
+            <option value="Monopoly for Nintendo">Monopoly for Nintendo</option>
+            <option value="Switch Controller (Blue)">Switch Controller (Blue)</option>
+            <option value="Vegeta Action Figure">Vegeta Action Figure</option>
+            <option value="Luigis Mansion">Luigis Mansion</option>
+            <option value="RGB Keyboard">RGB Keyboard</option>
+            <option value="Final Fantasy X1V">Final Fantasy X1V</option>
+            <option value="Donkey Kong">Donkey Kong</option>
+            <option value="Blair Witch">Blair Witch</option>
+            <option value="Xbox Controller (Camo)">Xbox Controller (Camo)</option>
+            <option value="Apex Legends">Apex Legends</option>
+        </select>
+        <button onclick="window.location.href='homePage.html'">Go to Home Page</button>
+        <script>
+        function navigateToProduct(productName) { // what this does is that we can search a product with a drop
+            document.getElementById('search').value = productName; // down menu and making choosing products an 
+            const event = new Event('input'); // easier task for the users
+            document.getElementById('search').dispatchEvent(event);
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+            page.style.display = 'none';// this part makes sure that even if the products are in a different page
+            }); // it will still be displayed automatically without the user manually changing the page themselves
+            const product = Array.from(document.querySelectorAll('.product')).find(product => product.querySelector('h2').textContent === productName);
+            if (product) {
+            product.closest('.page').style.display = 'block';
+            }
+        }
+        </script>
+    </header>
+    <main id="product-list"></main>
+   
+    <div class="pagination">
+        <button onclick="showPage(1)">1</button>
+        <button onclick="showPage(2)">2</button>
+        <button onclick="showPage(3)">3</button>
+    </div>
 
-        <div class="page" id="page1">
-            <section class="product" id="product1">
+    <div class="page" id="page1">
+        <section class="product" id="product1">
             <h2>The Last Of Us</h2>
-            <img src="images/1.jpg" alt="product1" width="200" height="200">
-            <p>The Last Of Us Playstation Game.</p>
+            <img src="images/1.jpg" alt="Product 1" width="200" height="200">
+            <p>The Last Of Us for Playstation.</p>
             <p>Price: $10.00</p>
             <button onclick="addToCart('The Last Of Us', 10.00)">Add to Cart</button>
             </section>
