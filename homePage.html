@@ -8,7 +8,28 @@
 </head>
 <body>
     <header>
-        <h1>GameVault</h1>
+        <h1 id="gameVaultTitle"></h1>
+        <script>
+            const title = "GameVault";
+            const titleElement = document.getElementById("gameVaultTitle");
+            let index = 0;
+
+            function typeTitle() {
+            if (index < title.length) {
+                titleElement.innerHTML += title.charAt(index);
+                index++;
+                setTimeout(typeTitle, 150); // Adjusting the delay for realistic typing effect
+            } else {
+                setTimeout(() => {
+                titleElement.innerHTML = "";
+                index = 0;
+                typeTitle();
+                }, 3000); // 3 seconds Delay before restarting the typing effect
+            }
+            }
+
+            window.onload = typeTitle;
+        </script>
         <nav>
             <ul>
                 <li><a href="homePage.html" class="nav-link">Home</a></li>
