@@ -45,7 +45,6 @@ navMenu.addEventListener('click', (e) => {
 searchButton.addEventListener('click', (e) => {
   // Handle search input
   e.preventDefault();
-  alert('Search button clicked!');
   const searchTerm = searchInput.value.trim();
   if (searchTerm !== '') {
     // Search for games
