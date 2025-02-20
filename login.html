@@ -51,7 +51,7 @@
     <div class="login-container">
         <h2>Login</h2>
         <form id="loginForm">
-            <input type="text" name="username" placeholder="Username" required>
+            <input type="text" name="userEmail" placeholder="Email" required>
             <input type="password" name="password" placeholder="Password" required>
             <button type="submit">Login</button>
         </form>
@@ -59,14 +59,18 @@
     <script>
         document.getElementById('loginForm').addEventListener('submit', function(event) {
             event.preventDefault();
-            const username = event.target.username.value;
+            const userEmail = event.target.userEmail.value;
+            if (!userEmail.includes('@')) {
+                alert('Please enter a valid email address.');
+                return;
+            }
             const password = event.target.password.value;
 
             // Perform your login logic here
-            if (username === 'admin' && password === 'password') {
+            if (userEmail === 'example@gmail.com' && password === 'password') {
                 window.location.href = 'homePage.html';
             } else {
-                alert('Invalid username or password');
+                alert('Invalid email or password');
             }
         });
     </script>
