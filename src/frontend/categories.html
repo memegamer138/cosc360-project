@@ -6,42 +6,95 @@
     <title>Categories</title>
     <link rel="stylesheet" href="styles.css">
     <script>
-
-    function addToCart(productName, price) {
-            alert(productName + " has been added to your cart at a price of $" + price + "!");
-            window.location.href = "cart.html";
-        }
-    function showCategory() {
-        var select = document.getElementById("categorySelect");
-        var selectedCategory = select.value;
-        var categories = document.getElementsByClassName("category");
-
-        for (var i = 0; i < categories.length; i++) {
-            if (selectedCategory === "all" || categories[i].id === selectedCategory) {
-                categories[i].style.display = "block";
+        function typeTitle() {
+            if (index < title.length) {
+                titleElement.innerHTML += title.charAt(index);
+                index++;
+                setTimeout(typeTitle, 150); // Adjusting the delay for realistic typing effect
             } else {
-                categories[i].style.display = "none";
+                setTimeout(() => {
+                    titleElement.innerHTML = "";
+                    index = 0;
+                    typeTitle();
+                }, 3000); // 3 seconds Delay before restarting the typing effect
             }
         }
-}
+        function addToCart(productName, price) {
+                alert(productName + " has been added to your cart at a price of $" + price + "!");
+                window.location.href = "cart.html";
+            }
 
-function getQueryParam(param) {
-            var urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(param);
+        function searchProducts() {
+        var input = document.getElementById("searchInput").value.toLowerCase();
+        var products = document.getElementsByClassName("product-item");
+
+        for (var i = 0; i < products.length; i++) {
+            var productInfo = products[i].getElementsByClassName("product-info")[0];
+            var textContent = productInfo.textContent || productInfo.innerText;
+
+            if (textContent.toLowerCase().indexOf(input) > -1) {
+                products[i].style.display = "";
+            } else {
+                products[i].style.display = "none";
+            }
+                }
+            }
+            function searchProducts() {
+            var input = document.getElementById("searchInput").value.toLowerCase();
+            var products = document.getElementsByClassName("product-item");
+            var categoryTitles = document.getElementsByClassName("category-title");
+
+            for (var i = 0; i < products.length; i++) {
+                var productInfo = products[i].getElementsByClassName("product-info")[0];
+                var textContent = productInfo.textContent || productInfo.innerText;
+
+                if (textContent.toLowerCase().indexOf(input) > -1) {
+                    products[i].style.display = "";
+                } else {
+                    products[i].style.display = "none";
+                }
+            }
+
+            // Hide category titles if search input is not empty
+            for (var j = 0; j < categoryTitles.length; j++) {
+                if (input) {
+                    categoryTitles[j].style.display = "none";
+                } else {
+                    categoryTitles[j].style.display = "block";
+                }
+            }
         }
-        
-// Ensure the default category is displayed on page load
-window.onload = function() {
-    showCategory();
-};
+
+        function getQueryParam(param) {
+                    var urlParams = new URLSearchParams(window.location.search);
+                    return urlParams.get(param);
+                }
+                
+        // Ensure the default category is displayed on page load
+        window.onload = function() {
+            var category = getQueryParam('category');
+            if (category) {
+                document.getElementById("categorySelect").value = category;
+                showCategory();
+            }
+            typeTitle();
+        };
 
     </script>
 </head>
 <body>
     <header>
         <h1>Categories</h1>
-        <button style="float: right;" onclick="window.location.href='homePage.html'">Go to Home Page</button>
-        
+        <nav>
+            <ul>
+                <li><a href="homePage.html" class="nav-link">Home</a></li>
+                <li><a href="featuredProducts.html" class="nav-link">Featured Products</a></li>
+                <li><a href="categories.html" class="nav-link">Categories</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                <li><a href="cart.html" class="nav-link">Cart</a></li>
+                <li><a href="login.html" class="nav-link">Login</a></li>
+            </ul>
+        </nav>
         <!-- Dropdown menu for category selection -->
         <select id="categorySelect" onchange="showCategory()">
             <option value="all">Select Category</option>
@@ -51,238 +104,328 @@ window.onload = function() {
             <option value="nintendo">Nintendo Switch</option>
             <option value="accessories">Accessories</option>
         </select>
+         <!-- Search bar for product info -->
+         <input type="text" id="searchInput" onkeyup="searchProducts()" placeholder="Search for products...">
+ 
     </header>
     
 
     <div class="category" id="playstation">
-        <h2><u>PlayStation</u></h2>
+        <center><h2 class="category-title">PlayStation</h2></center>
         <ul class="product-list">
-            <li>
-                <h2>The Last Of Us</h2>
-                <img src="images/1.jpg" alt="The Last of Us" width="200" height="200">
-                <p>The Last Of Us for Playstation.</p>
-                <p>Price: $10.00</p>
-                <button onclick="addToCart('The Last Of Us', 10.00)">Add to Cart</button>
+            <li class="product-item">
+                <div class="product-image">
+                    <img src="../../images/1.jpg" alt="The Last of Us">
+                    <div class="product-info">
+                        <h3>The Last Of Us</h3>
+                        <p>Price: $40.00</p>
+                        <button onclick="addToCart('The Last Of Us', 40.00)" class="cartButton">Add to Cart</button>
+                    </div>
+                </div>
             </li>
-            <li>
-                <h2>Uncharted Bundle</h2>
-                <img src="images/2.jpg" alt="Uncharted Bundle" width="200" height="200">
-                <p>Uncharted Bundle for Playstation.</p>
-                <p>Price: $20.00</p>
-                <button onclick="addToCart('Uncharted Bundle', 20.00)">Add to Cart</button>
+            <li class="product-item">
+                <div class="product-image">
+                    <img src="../../images/2.jpg" alt="Uncharted Digtital Bundle">
+                    <div class="product-info">
+                        <h3>Uncharted Digital Bundle</h3>
+                        <p>Price: $60.00</p>
+                        <button onclick="addToCart('Uncharted Digital Bundle', 60.00)" class="cartButton">Add to Cart</button>
+                    </div>
+                </div>
             </li>
-            <li>
-                <h2>Spider-Man Miles Morales</h2>
-                <img src="images/4.jpg" alt="Spider-Man Miles Morales" width="200" height="200">
-                <p>Action/Superhero by Insomniac for Playstation.</p>
-                <p>Price: $20.00</p>
-                <button onclick="addToCart('Spider-Man Miles Morales', 20.00)">Add to Cart</button>
+            <li class="product-item">
+                <div class="product-image">
+                    <img src="../../images/4.jpg" alt="Spiderman Miles-Morales">
+                    <div class="product-info">
+                        <h3>Spiderman Miles-Morales</h3>
+                        <p>Price: $45.00</p>
+                        <button onclick="addToCart('Spiderman Miles-Morales', 45.00)" class="cartButton">Add to Cart</button>
+                    </div>
+                </div>
             </li>
-            <li>
-                <h2>PS5 Controller</h2>
-                <img src="images/6.jpg" alt="PS5 Controller" width="200" height="200">
-                <p>PS5 Controller.</p>
-                <p>Price: $20.00</p>
-                <button onclick="addToCart('PS5 Controller', 20.00)">Add to Cart</button>
+            <li class="product-item">
+                <div class="product-image">
+                    <img src="../../images/6.jpg" alt="PS5 Controller">
+                    <div class="product-info">
+                        <h3>PS5 Controller</h3>
+                        <p>Price: $20.00</p>
+                        <button onclick="addToCart('PS5 Controller', 20.00)" class="cartButton">Add to Cart</button>
+                    </div>
+                </div>
             </li>
-            <li>
-                <h2>Ghost of Tsushima</h2>
-                <img src="images/10.jpg" alt="Ghost of Tsushima" width="200" height="200">
-                <p>RPG/Fighting by Sucker Punch Productions.</p>
-                <p>Price: $31.00</p>
-                <button onclick="addToCart('Ghost of Tsushima', 31.00)">Add to Cart</button>
+            <li class="product-item">
+                <div class="product-image">
+                    <img src="../../images/10.jpg" alt="Ghost of Tsuhima">
+                    <div class="product-info">
+                        <h3>Ghost of Tsuhima</h3>
+                        <p>Price: $50.00</p>
+                        <button onclick="addToCart('Ghost of Tsuhima', 50.00)" class="cartButton">Add to Cart</button>
+                    </div>
+                </div>
             </li>
-            <li>
-                <h2>Shadow of the Colossus</h2>
-                <img src="images/14.jpg" alt="Shadow of the Colossus" width="200" height="200">
-                <p>Action/Adventure by Japan Studio.</p>
-                <p>Price: $15.50</p>
-                <button onclick="addToCart('Shadow of the Colossus', 15.50)">Add to Cart</button>
+            <li class="product-item">
+                <div class="product-image">
+                    <img src="../../images/14.jpg" alt="Shadow of the Colossus">
+                    <div class="product-info">
+                        <h3>Shadow of the Colossus</h3>
+                        <p>Price: $50.00</p>
+                        <button onclick="addToCart('Shadow of the Colossus', 50.00)" class="cartButton">Add to Cart</button>
+                    </div>
+                </div>
             </li>
-            <li>
-                <h2>Subnautica</h2>
-                <img src="images/16.jpg" alt="Subnautica" width="200" height="200">
-                <p>Survival/Adventure by Unknown Worlds Entertainment.</p>
-                <p>Price: $19.00</p>
-                <button onclick="addToCart('Subnautica', 19.00)">Add to Cart</button>
+            <li class="product-item">
+                <div class="product-image">
+                    <img src="../../images/16.jpg" alt="Subnautica">
+                    <div class="product-info">
+                        <h3>Subnautica</h3>
+                        <p>Price: $30.00</p>
+                        <button onclick="addToCart('Subnautica', 30.00)" class="cartButton">Add to Cart</button>
+                    </div>
+                </div>
             </li>
-            <li>
-                <h2>Apex Legends</h2>
-                <img src="images/29.jpg" alt="Apex Legends" width="200" height="200">
-                <p>FPS/Online by Respawn Entertainment.</p>
-                <p>Price: $14.00</p>
-                <button onclick="addToCart('Apex Legends', 14.00)">Add to Cart</button>
+            <li class="product-item">
+                <div class="product-image">
+                    <img src="../../images/29.jpg" alt="Apex Legends">
+                    <div class="product-info">
+                        <h3>Apex Legends</h3>
+                        <p>Price: $10.00</p>
+                        <button onclick="addToCart('Apex Legends', 10.00)" class="cartButton">Add to Cart</button>
+                    </div>
+                </div>
             </li>
         </ul>
     </div>
 
     <div class="category" id="xbox">
-        <h2><u>XBOX</u></h2>
+        <center><h2 class="category-title">XBOX</h2></center>
         <ul class="product-list">
-            <li>
-                <h2>Forza Horizon 4</h2>
-                <img src="images/12.jpg" alt="Forza Horizon 4" width="200" height="200">
-                <p>Racing by Microsoft.</p>
-                <p>Price: $38.00</p>
-                <button onclick="addToCart('Forza Horizon 4', 38.00)">Add to Cart</button>
+            <li class="product-item">
+                <div class="product-image">
+                    <img src="../../images/12.jpg" alt="Forza Horizon 4">
+                    <div class="product-info">
+                        <h3>Forza Horizon 4</h3>
+                        <p>Price: $40.00</p>
+                        <button onclick="addToCart('Forza Horizon 4', 40.00)" class="cartButton">Add to Cart</button>
+                    </div>
+                </div>
             </li>
-            <li>
-                <h2>Halo</h2>
-                <img src="images/17.jpg" alt="Halo" width="200" height="200">
-                <p>Online/Shooter by Microsoft.</p>
-                <p>Price: $62.50</p>
-                <button onclick="addToCart('Halo', 62.50)">Add to Cart</button>
+            <li class="product-item">
+                <div class="product-image">
+                    <img src="../../images/17.jpg" alt="Halo Reach">
+                    <div class="product-info">
+                        <h3>Halo Reach</h3>
+                        <p>Price: $25.00</p>
+                        <button onclick="addToCart('Halo Reach', 25.00)" class="cartButton">Add to Cart</button>
+                    </div>
+                </div>
             </li>
-            <li>
-                <h2>Xbox Controller (Camo)</h2>
-                <img src="images/28.jpg" alt="Xbox Controller (Camo)" width="200" height="200">
-                <p>Controller.</p>
-                <p>Price: $21.05</p>
-                <button onclick="addToCart('Xbox Controller (Camo)', 21.05)">Add to Cart</button>
+            <li class="product-item">
+                <div class="product-image">
+                    <img src="../../images/28.jpg" alt="XBOX Controller (Camo)">
+                    <div class="product-info">
+                        <h3>XBOX Controller (Camo)</h3>
+                        <p>Price: $25.00</p>
+                        <button onclick="addToCart('XBOX Controller (Camo)', 25.00)" class="cartButton">Add to Cart</button>
+                    </div>
+                </div>
             </li>
         </ul>
     </div>
 
     <div class="category" id="pc">
-        <h2><u>PC</u></h2>
-        <ul class="product-list">
-            <li>
-                <h2>GTA 6</h2>
-                <img src="images/3.jpg" alt="GTA 6" width="200" height="200">
-                <p>GTA 6 for PC.</p>
-                <p>Price: $20.00</p>
-                <button onclick="addToCart('GTA 6', 20.00)">Add to Cart</button>
-            </li>
-            <li>
-                <h2>Five Nights at Freddys</h2>
-                <img src="images/7.jpg" alt="Five Nights at Freddys" width="200" height="200">
-                <p>Horror/Indie by Scott Cawthon.</p>
-                <p>Price: $30.00</p>
-                <button onclick="addToCart('Five Nights at Freddys', 30.00)">Add to Cart</button>
-            </li>
-            <li>
-                <h2>Valorant</h2>
-                <img src="images/9.jpg" alt="Valorant" width="200" height="200">
-                <p>FPS/Shooting by Riot Games.</p>
-                <p>Price: $7.00</p>
-                <button onclick="addToCart('Valorant', 7.00)">Add to Cart</button>
-            </li>
-            <li>
-                <h2>Dead by Daylight</h2>
-                <img src="images/11.jpg" alt="Dead by Daylight" width="200" height="200">
-                <p>Horror/Online by Behaviour Interactive.</p>
-                <p>Price: $21.00</p>
-                <button onclick="addToCart('Dead by Daylight', 21.00)">Add to Cart</button>
-            </li>
-            <li>
-                <h2>Captain Claw</h2>
-                <img src="images/19.jpg" alt="Captain Claw" width="200" height="200">
-                <p>Platform by Monolith Productions.</p>
-                <p>Price: $81.00</p>
-                <button onclick="addToCart('Captain Claw', 81.00)">Add to Cart</button>
-            </li>
-            <li>
-                <h2>RGB Keyboard</h2>
-                <img src="images/24.jpg" alt="RGB Keyboard" width="200" height="200">
-                <p>Keyboard.</p>
-                <p>Price: $99.00</p>
-                <button onclick="addToCart('RGB Keyboard', 99.00)">Add to Cart</button>
-            </li>
-            <li>
-                <h2>Final Fantasy XIV</h2>
-                <img src="images/25.jpg" alt="Final Fantasy XIV" width="200" height="200">
-                <p>Online/RPG by Square Enix.</p>
-                <p>Price: $18.40</p>
-                <button onclick="addToCart('Final Fantasy XIV', 18.40)">Add to Cart</button>
-            </li>
-            <li>
-                <h2>Blair Witch</h2>
-                <img src="images/27.jpg" alt="Blair Witch" width="200" height="200">
-                <p>Horror/RPG by Bloober Team.</p>
-                <p>Price: $14.00</p>
-                <button onclick="addToCart('Blair Witch', 14.00)">Add to Cart</button>
-            </li>
+        <center><h2 class="category-title">PC</h2></center>
+            <ul class="product-list">
+                <li class="product-item">
+                    <div class="product-image">
+                        <img src="../../images/3.jpg" alt="GTA 6">
+                        <div class="product-info">
+                            <h3>GTA 6</h3>
+                            <p>Price: $80.00</p>
+                            <button onclick="addToCart('GTA 6', 80.00)" class="cartButton">Add to Cart</button>
+                        </div>
+                    </div>
+                </li>
+                <li class="product-item">
+                    <div class="product-image">
+                        <img src="../../images/7.jpg" alt="GTA 6">
+                        <div class="product-info">
+                            <h3>Five Nights at Freddy's</h3>
+                            <p>Price: $15.00</p>
+                            <button onclick="addToCart('Five Nights at Freddys', 15.00)" class="cartButton">Add to Cart</button>
+                        </div>
+                    </div>
+                </li>
+                <li class="product-item">
+                    <div class="product-image">
+                        <img src="../../images/9.jpg" alt="Valorant">
+                        <div class="product-info">
+                            <h3>Valorant</h3>
+                            <p>Price: $10.00</p>
+                            <button onclick="addToCart('Valorant', 10.00)" class="cartButton">Add to Cart</button>
+                        </div>
+                    </div>
+                </li>
+                <li class="product-item">
+                    <div class="product-image">
+                        <img src="../../images/11.jpg" alt="Dead by Daylight">
+                        <div class="product-info">
+                            <h3>Dead by Daylight</h3>
+                            <p>Price: $18.00</p>
+                            <button onclick="addToCart('Dead by Daylight', 18.00)" class="cartButton">Add to Cart</button>
+                        </div>
+                    </div>
+                </li>
+                <li class="product-item">
+                    <div class="product-image">
+                        <img src="../../images/19.jpg" alt="Captain Claw">
+                        <div class="product-info">
+                            <h3>Captain Claw</h3>
+                            <p>Price: $12.00</p>
+                            <button onclick="addToCart('Captain Claw', 12.00)" class="cartButton">Add to Cart</button>
+                        </div>
+                    </div>
+                </li>
+                <li class="product-item">
+                    <div class="product-image">
+                        <img src="../../images/24.jpg" alt="Razer V3 Keyboard">
+                        <div class="product-info">
+                            <h3>Razer V3 Keyboard</h3>
+                            <p>Price: $50.00</p>
+                            <button onclick="addToCart('Razer V3 Keyboard', 50.00)" class="cartButton">Add to Cart</button>
+                        </div>
+                    </div>
+                </li>
+                <li class="product-item">
+                    <div class="product-image">
+                        <img src="../../images/25.jpg" alt="Final Fantasy XIV">
+                        <div class="product-info">
+                            <h3>Final Fantasy XIV</h3>
+                            <p>Price: $45.00</p>
+                            <button onclick="addToCart('Final Fantasy XIV', 45.00)" class="cartButton">Add to Cart</button>
+                        </div>
+                    </div>
+                </li>
+                <li class="product-item">
+                    <div class="product-image">
+                        <img src="../../images/27.png" alt="Blair Witch">
+                        <div class="product-info">
+                            <h3>Blair Witch</h3>
+                            <p>Price: $35.00</p>
+                            <button onclick="addToCart('Blair Witch', 35.00)" class="cartButton">Add to Cart</button>
+                        </div>
+                    </div>
+                </li>
         </ul>
     </div>
 
     <div class="category" id="nintendo">
-        <h2><u>Nintendo Switch</u></h2>
+        <center><h2 class="category-title">Nintendo</h2></center>
         <ul class="product-list">
-            <li>
-                <h2>Mario Bros Kart</h2>
-                <img src="images/5.jpg" alt="Mario Bros Kart" width="200" height="200">
-                <p>Mario Bros Kart Racing for Nintendo Switch.</p>
-                <p>Price: $20.00</p>
-                <button onclick="addToCart('Mario Bros Kart', 20.00)">Add to Cart</button>
+            <li class="product-item">
+                <div class="product-image">
+                    <img src="../../images/5.jpg" alt="Mario Kart 64">
+                    <div class="product-info">
+                        <h3>Mario Kart 64</h3>
+                        <p>Price: $10.00</p>
+                        <button onclick="addToCart('Mario Kart 64', 10.00)" class="cartButton">Add to Cart</button>
+                    </div>
+                </div>
             </li>
-            <li>
-                <h2>Midtown Madness</h2>
-                <img src="images/13.jpg" alt="Midtown Madness" width="200" height="200">
-                <p>Racing by Angel Studios.</p>
-                <p>Price: $23.25</p>
-                <button onclick="addToCart('Midtown Madness', 23.25)">Add to Cart</button>
+            <li class="product-item">
+                <div class="product-image">
+                    <img src="../../images/13.jpg" alt="Midtown Madness">
+                    <div class="product-info">
+                        <h3>Midtown Madness</h3>
+                        <p>Price: $25.00</p>
+                        <button onclick="addToCart('Midtown Madness', 25.00)" class="cartButton">Add to Cart</button>
+                    </div>
+                </div>
             </li>
-            <li>
-                <h2>Mario Smash Bros</h2>
-                <img src="images/15.jpg" alt="Mario Smash Bros" width="200" height="200">
-                <p>Fighting by Nintendo.</p>
-                <p>Price: $17.45</p>
-                <button onclick="addToCart('Mario Smash Bros', 17.45)">Add to Cart</button>
+            <li class="product-item">
+                <div class="product-image">
+                    <img src="../../images/15.jpg" alt="Mario Smash Bros">
+                    <div class="product-info">
+                        <h3>Mario Smash Bros</h3>
+                        <p>Price: $25.00</p>
+                        <button onclick="addToCart('Mario Smash Bros', 25.00)" class="cartButton">Add to Cart</button>
+                    </div>
+                </div>
             </li>
-            <li>
-                <h2>Monopoly for Nintendo</h2>
-                <img src="images/20.jpg" alt="Monopoly for Nintendo" width="200" height="200">
-                <p>Family by Nintendo.</p>
-                <p>Price: $10.00</p>
-                <button onclick="addToCart('Monopoly for Nintendo', 10.00)">Add to Cart</button>
+            <li class="product-item">
+                <div class="product-image">
+                    <img src="../../images/20.jpg" alt="Monopoly">
+                    <div class="product-info">
+                        <h3>Monopoly</h3>
+                        <p>Price: $15.00</p>
+                        <button onclick="addToCart('Monopoly', 15.00)" class="cartButton">Add to Cart</button>
+                    </div>
+                </div>
             </li>
-            <li>
-                <h2>Donkey Kong</h2>
-                <img src="images/26.jpg" alt="Donkey Kong" width="200" height="200">
-                <p>Platform by Nintendo.</p>
-                <p>Price: $89.65</p>
-                <button onclick="addToCart('Donkey Kong', 89.65)">Add to Cart</button>
+            <li class="product-item">
+                <div class="product-image">
+                    <img src="../../images/26.jpg" alt="Donkey Kong">
+                    <div class="product-info">
+                        <h3>Donkey Kong</h3>
+                        <p>Price: $15.00</p>
+                        <button onclick="addToCart('Donkey Kong', 15.00)" class="cartButton">Add to Cart</button>
+                    </div>
+                </div>
             </li>
-            <li>
-                <h2>Switch Controller (Blue)</h2>
-                <img src="images/21.jpg" alt="Switch Controller (Blue)" width="200" height="200">
-                <p>Controller.</p>
-                <p>Price: $21.00</p>
-                <button onclick="addToCart('Switch Controller (Blue)', 21.00)">Add to Cart</button>
+            <li class="product-item">
+                <div class="product-image">
+                    <img src="../../images/21.jpg" alt="Switch Controller">
+                    <div class="product-info">
+                        <h3>Switch Controller</h3>
+                        <p>Price: $15.00</p>
+                        <button onclick="addToCart('Switch Controller', 15.00)" class="cartButton">Add to Cart</button>
+                    </div>
+                </div>
             </li>
-            <li>
-                <h2>Luigis Mansion</h2>
-                <img src="images/23.jpg" alt="Luigis Mansion" width="200" height="200">
-                <p>Horror/Family by Nintendo.</p>
-                <p>Price: $18.00</p>
-                <button onclick="addToCart('Luigis Mansion', 18.00)">Add to Cart</button>
+            <li class="product-item">
+                <div class="product-image">
+                    <img src="../../images/23.jpg" alt="Luigi's Mansion">
+                    <div class="product-info">
+                        <h3>Luigi's Mansion</h3>
+                        <p>Price: $15.00</p>
+                        <button onclick="addToCart('Luigis Mansion', 15.00)" class="cartButton">Add to Cart</button>
+                    </div>
+                </div>
             </li>
         </ul>
     </div>
 
     <div class="category" id="accessories">
-        <h2><u>Accessories</u></h2>
+        <center><h2 class="category-title">Accessories</h2></center>
         <ul class="product-list">
-            <li>
-                <h2>Freddy Plushie</h2>
-                <img src="images/8.jpg" alt="Freddy Plushie" width="200" height="200">
-                <p>Plushie.</p>
-                <p>Price: $40.00</p>
-                <button onclick="addToCart('Freddy Plushie', 40.00)">Add to Cart</button>
+            <li class="product-item">
+                <div class="product-image">
+                    <img src="../../images/8.jpg" alt="Five Nights at Freddy's Plushie">
+                    <div class="product-info">
+                        <h3>Five Nights at Freddy's Plushie Collection</h3>
+                        <p>Price: $20.00</p>
+                        <button onclick="addToCart('Five Nights at Freddys Plushie Collection', 20.00)" class="cartButton">Add to Cart</button>
+                    </div>
+                </div>
             </li>
-            <li>
-                <h2>Need For Speed Poster</h2>
-                <img src="images/18.jpg" alt="Need For Speed Poster" width="200" height="200">
-                <p>Poster.</p>
-                <p>Price: $9.20</p>
-                <button onclick="addToCart('Need For Speed Poster', 9.20)">Add to Cart</button>
+            <li class="product-item">
+                <div class="product-image">
+                    <img src="../../images/18.jpg" alt="Need for Speed Poster">
+                    <div class="product-info">
+                        <h3>Need for Speed Poster</h3>
+                        <p>Price: $10.00</p>
+                        <button onclick="addToCart('Need for Speed Poster', 10.00)" class="cartButton">Add to Cart</button>
+                    </div>
+                </div>
             </li>
-            <li>
-                <h2>Vegeta Action Figure</h2>
-                <img src="images/22.jpg" alt="Vegeta Action Figure" width="200" height="200">
-                <p>Dragon Ball Action Figure.</p>
-                <p>Price: $14.00</p>
-                <button onclick="addToCart('Vegeta Action Figure', 14.00)">Add to Cart</button>
+            <li class="product-item">
+                <div class="product-image">
+                    <img src="../../images/22.png" alt="Vegeta Poster">
+                    <div class="product-info">
+                        <h3>Vegeta Poster</h3>
+                        <p>Price: $10.00</p>
+                        <button onclick="addToCart('Vegeta Poster', 10.00)" class="cartButton">Add to Cart</button>
+                    </div>
+                </div>
             </li>
         </ul>
     </div>
@@ -293,4 +436,3 @@ window.onload = function() {
 <footer>
     <p>&copy; 2025 GameVault</p>
 </footer>
-
