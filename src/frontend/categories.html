@@ -6,19 +6,6 @@
     <title>Categories</title>
     <link rel="stylesheet" href="styles.css">
     <script>
-        function typeTitle() {
-            if (index < title.length) {
-                titleElement.innerHTML += title.charAt(index);
-                index++;
-                setTimeout(typeTitle, 150); // Adjusting the delay for realistic typing effect
-            } else {
-                setTimeout(() => {
-                    titleElement.innerHTML = "";
-                    index = 0;
-                    typeTitle();
-                }, 3000); // 3 seconds Delay before restarting the typing effect
-            }
-        }
         function addToCart(productName, price) {
                 alert(productName + " has been added to your cart at a price of $" + price + "!");
                 window.location.href = "cart.html";
@@ -75,14 +62,34 @@
                 document.getElementById("categorySelect").value = category;
                 showCategory();
             }
-            typeTitle();
         };
 
     </script>
 </head>
 <body>
     <header>
-        <h1>Categories</h1>
+        <h1 id="gameVaultTitle"></h1>
+        <script>
+            const title = "Categories";
+            const titleElement = document.getElementById("gameVaultTitle");
+            let index = 0;
+
+            function typeTitle() {  // Typing effect for the title
+                if (index < title.length) {
+                    titleElement.innerHTML += title.charAt(index);
+                    index++;
+                    setTimeout(typeTitle, 150); // Adjusting the delay for realistic typing effect
+                } else {
+                    setTimeout(() => {
+                    titleElement.innerHTML = "";
+                    index = 0;
+                    typeTitle();
+                    }, 3000); // 3 seconds Delay before restarting the typing effect
+                }
+            }
+
+            window.onload = typeTitle;
+        </script>
         <nav>
             <ul>
                 <li><a href="homePage.html" class="nav-link">Home</a></li>
