@@ -24,22 +24,26 @@
                 window.location.href = "cart.html";
             }
 
-        function searchProducts() {
-        var input = document.getElementById("searchInput").value.toLowerCase();
-        var products = document.getElementsByClassName("product-item");
+        function showCategory() {
+            var select = document.getElementById("categorySelect");
+            var selectedCategory = select.value;
+            var categories = document.getElementsByClassName("category");
 
-        for (var i = 0; i < products.length; i++) {
-            var productInfo = products[i].getElementsByClassName("product-info")[0];
-            var textContent = productInfo.textContent || productInfo.innerText;
-
-            if (textContent.toLowerCase().indexOf(input) > -1) {
-                products[i].style.display = "";
-            } else {
-                products[i].style.display = "none";
-            }
+            for (var i = 0; i < categories.length; i++) {
+                if (selectedCategory === "all" || categories[i].id === selectedCategory) {
+                    categories[i].style.display = "block";
+                } else {
+                    categories[i].style.display = "none";
+                }
                 }
             }
-            function searchProducts() {
+
+        function getQueryParam(param) {
+                    var urlParams = new URLSearchParams(window.location.search);
+                    return urlParams.get(param);
+                }
+
+        function searchProducts() {
             var input = document.getElementById("searchInput").value.toLowerCase();
             var products = document.getElementsByClassName("product-item");
             var categoryTitles = document.getElementsByClassName("category-title");
@@ -64,12 +68,6 @@
                 }
             }
         }
-
-        function getQueryParam(param) {
-                    var urlParams = new URLSearchParams(window.location.search);
-                    return urlParams.get(param);
-                }
-                
         // Ensure the default category is displayed on page load
         window.onload = function() {
             var category = getQueryParam('category');
