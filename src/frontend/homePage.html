@@ -14,18 +14,22 @@
             const titleElement = document.getElementById("gameVaultTitle");
             let index = 0;
 
-            function typeTitle() {
-            if (index < title.length) {
-                titleElement.innerHTML += title.charAt(index);
-                index++;
-                setTimeout(typeTitle, 150); // Adjusting the delay for realistic typing effect
-            } else {
-                setTimeout(() => {
-                titleElement.innerHTML = "";
-                index = 0;
-                typeTitle();
-                }, 3000); // 3 seconds Delay before restarting the typing effect
+            function typeTitle() {  // Typing effect for the title
+              if (index < title.length) {
+                  titleElement.innerHTML += title.charAt(index);
+                  index++;
+                  setTimeout(typeTitle, 150); // Adjusting the delay for realistic typing effect
+              } else {
+                  setTimeout(() => {
+                  titleElement.innerHTML = "";
+                  index = 0;
+                  typeTitle();
+                  }, 3000); // 3 seconds Delay before restarting the typing effect
+              }
             }
+
+            function redirectToCategory(category) {
+                window.location.href = 'categories.html?category=' + category;
             }
 
             window.onload = typeTitle;
@@ -35,13 +39,13 @@
                 <li><a href="homePage.html" class="nav-link">Home</a></li>
                 <li><a href="featuredProducts.html" class="nav-link">Featured Products</a></li>
                 <li><a href="categories.html" class="nav-link">Categories</a></li>
-                <li><a href="login.html" class="nav-link">Login</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
                 <li><a href="cart.html" class="nav-link">Cart</a></li>
-                <li><a href="login.html" class="nav-link" onclick="location.href='login.html'; return false;">Logout</a></li>
+                <li><a href="login.html" class="nav-link">Login</a></li>
             </ul>
         </nav>
         <div class="search-bar">
-            <select id="searchDropdown" onchange="location = this.value;">
+            <select id="searchDropdown" onchange="redirectToCategory(this.value)">
             <option value="homePage.html">Search for products...</option>
             <option value="PlayStation.html">PlayStation</option>
             <option value="Xbox.html">Xbox</option>
@@ -52,23 +56,49 @@
         </div>
     </header>
     <main>
-        <h2>Featured Products</h2>
-        <section class="featured-products"> </section>
-
+        <section class="description"></section>
+            <h2>Welcome to GameVault</h2>
+            <p>GameVault is your ultimate destination for all things gaming. We offer a wide range of products including the latest games, consoles, and accessories for PlayStation, Xbox, PC, and Nintendo Switch. Explore our featured products, browse through various categories, and find the best deals on your favorite gaming gear. Whether you're a casual gamer or a hardcore enthusiast, GameVault has something for everyone. Join our community and stay updated with the latest trends and releases in the gaming world.</p>
+        </section><br>
         <section class="categories">
             <h2>Categories</h2>
-            <ol>
-                <li><a href="PlayStation.html" class="category-link" style="color: white;">🎮 PlayStation</a></li>
-                <li><a href="Xbox.html" class="category-link" style="color: white;">🎮 Xbox</a></li>
-                <li><a href="PC.html" class="category-link" style="color: white;">⌨️ PC</a></li>
-                <li><a href="NintendoSwitch.html" class="category-link" style="color: white;">🕹️ Nintendo Switch</a></li>
-                <li><a href="accessories.html" class="category-link" style="color: white;">🛠️ Accessories</a></li>
-            </ol>
+            <div class="category-grid">
+                <div class="category-item">
+                    <a href="PlayStation.html" class="category-link">
+                        <img src="../../images/playstation.jpg" alt="PlayStation">
+                        <span>PlayStation</span>
+                    </a>
+                </div>
+                <div class="category-item">
+                    <a href="Xbox.html" class="category-link">
+                        <img src="../../images/xbox.jpg" alt="Xbox">
+                        <span>Xbox</span>
+                    </a>
+                </div>
+                <div class="category-item">
+                    <a href="PC.html" class="category-link">
+                        <img src="../../images/pc.jpg" alt="PC">
+                        <span>PC</span>
+                    </a>
+                </div>
+                <div class="category-item">
+                    <a href="NintendoSwitch.html" class="category-link">
+                        <img src="../../images/nintendo.png" alt="Nintendo Switch">
+                        <span>Nintendo Switch</span>
+                    </a>
+                </div>
+                <div class="category-item">
+                    <a href="accessories.html" class="category-link">
+                        <img src="../../images/accessories.jpg" alt="Accessories">
+                                               <span>Accessories</span>
+                    </a>
+                </div>
+            </div>
         </section>
     </main>
     <footer>
         <p>&copy; 2025 GameVault. All rights reserved.</p>
     </footer>
-    <script src="homePage.js"></script>
+    <script src="../backend/homePage.js"></script>
 </body>
 </html>
