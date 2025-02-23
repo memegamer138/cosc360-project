@@ -14,7 +14,7 @@
             const titleElement = document.getElementById("gameVaultTitle");
             let index = 0;
 
-            function typeTitle() {
+            function typeTitle() {  // Typing effect for the title
             if (index < title.length) {
                 titleElement.innerHTML += title.charAt(index);
                 index++;
@@ -28,6 +28,9 @@
             }
             }
 
+            function redirectToCategory(category) {
+                window.location.href = 'categories.html?category=' + category;
+            }
             window.onload = typeTitle;
         </script>
         <nav>
@@ -41,7 +44,7 @@
             </ul>
         </nav>
         <div class="search-bar">
-            <select id="searchDropdown" onchange="location = this.value;">
+            <select id="searchDropdown" onchange="redirectToCategory(this.value)">
             <option value="homePage.html">Search for products...</option>
             <option value="PlayStation.html">PlayStation</option>
             <option value="Xbox.html">Xbox</option>
