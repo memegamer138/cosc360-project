@@ -15,21 +15,17 @@
             let index = 0;
 
             function typeTitle() {  // Typing effect for the title
-              if (index < title.length) {
-                  titleElement.innerHTML += title.charAt(index);
-                  index++;
-                  setTimeout(typeTitle, 150); // Adjusting the delay for realistic typing effect
-              } else {
-                  setTimeout(() => {
-                  titleElement.innerHTML = "";
-                  index = 0;
-                  typeTitle();
-                  }, 3000); // 3 seconds Delay before restarting the typing effect
-              }
-            }
-
-            function redirectToCategory(category) {
-                window.location.href = 'categories.html?category=' + category;
+                if (index < title.length) {
+                    titleElement.innerHTML += title.charAt(index);
+                    index++;
+                    setTimeout(typeTitle, 150); // Adjusting the delay for realistic typing effect
+                } else {
+                    setTimeout(() => {
+                    titleElement.innerHTML = "";
+                    index = 0;
+                    typeTitle();
+                    }, 3000); // 3 seconds Delay before restarting the typing effect
+                }
             }
 
             window.onload = typeTitle;
@@ -44,16 +40,6 @@
                 <li><a href="login.html" class="nav-link">Login</a></li>
             </ul>
         </nav>
-        <div class="search-bar">
-            <select id="searchDropdown" onchange="redirectToCategory(this.value)">
-            <option value="homePage.html">Search for products...</option>
-            <option value="PlayStation.html">PlayStation</option>
-            <option value="Xbox.html">Xbox</option>
-            <option value="PC.html">PC</option>
-            <option value="NintendoSwitch.html">Nintendo Switch</option>
-            <option value="accessories.html">Accessories</option>
-            </select>
-        </div>
     </header>
     <main>
         <section class="description"></section>
@@ -64,33 +50,33 @@
             <h2>Categories</h2>
             <div class="category-grid">
                 <div class="category-item">
-                    <a href="PlayStation.html" class="category-link">
+                    <a href="categories.html?category=playstation" class="category-link">
                         <img src="../../images/playstation.jpg" alt="PlayStation">
                         <span>PlayStation</span>
                     </a>
                 </div>
                 <div class="category-item">
-                    <a href="Xbox.html" class="category-link">
+                    <a href="categories.html?category=xbox" class="category-link">
                         <img src="../../images/xbox.jpg" alt="Xbox">
                         <span>Xbox</span>
                     </a>
                 </div>
                 <div class="category-item">
-                    <a href="PC.html" class="category-link">
+                    <a href="categories.html?category=pc" class="category-link">
                         <img src="../../images/pc.jpg" alt="PC">
                         <span>PC</span>
                     </a>
                 </div>
                 <div class="category-item">
-                    <a href="NintendoSwitch.html" class="category-link">
+                    <a href="categories.html?category=nintendo" class="category-link">
                         <img src="../../images/nintendo.png" alt="Nintendo Switch">
                         <span>Nintendo Switch</span>
                     </a>
                 </div>
                 <div class="category-item">
-                    <a href="accessories.html" class="category-link">
+                    <a href="categories.html?category=accessories" class="category-link">
                         <img src="../../images/accessories.jpg" alt="Accessories">
-                                               <span>Accessories</span>
+                        <span>Accessories</span>
                     </a>
                 </div>
             </div>
