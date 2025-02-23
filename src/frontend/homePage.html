@@ -15,22 +15,23 @@
             let index = 0;
 
             function typeTitle() {  // Typing effect for the title
-            if (index < title.length) {
-                titleElement.innerHTML += title.charAt(index);
-                index++;
-                setTimeout(typeTitle, 150); // Adjusting the delay for realistic typing effect
-            } else {
-                setTimeout(() => {
-                titleElement.innerHTML = "";
-                index = 0;
-                typeTitle();
-                }, 3000); // 3 seconds Delay before restarting the typing effect
-            }
+              if (index < title.length) {
+                  titleElement.innerHTML += title.charAt(index);
+                  index++;
+                  setTimeout(typeTitle, 150); // Adjusting the delay for realistic typing effect
+              } else {
+                  setTimeout(() => {
+                  titleElement.innerHTML = "";
+                  index = 0;
+                  typeTitle();
+                  }, 3000); // 3 seconds Delay before restarting the typing effect
+              }
             }
 
             function redirectToCategory(category) {
                 window.location.href = 'categories.html?category=' + category;
             }
+
             window.onload = typeTitle;
         </script>
         <nav>
@@ -89,7 +90,7 @@
                 <div class="category-item">
                     <a href="accessories.html" class="category-link">
                         <img src="../../images/accessories.jpg" alt="Accessories">
-                        <span>Accessories</span>
+                                               <span>Accessories</span>
                     </a>
                 </div>
             </div>
