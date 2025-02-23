@@ -24,6 +24,12 @@
             }
         }
 }
+
+function getQueryParam(param) {
+            var urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+        
 // Ensure the default category is displayed on page load
 window.onload = function() {
     showCategory();
